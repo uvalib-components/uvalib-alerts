@@ -1,4 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
 <!--
-<link rel="stylesheet" href="//www.library.virginia.edu/wp-content/plugins/announcer/public/announcer-styles.css?ver=4.5.2">
-<script type='text/javascript' src="//www.library.virginia.edu/wp-content/plugins/announcer/public/announcer-js.js?ver=4.5.2"></script>
+`uvalib-alerts`
+University of Virginia Library Alert dialog
+
+@demo demo/index.html 
 -->
+
+<dom-module id="uvalib-alerts">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'uvalib-alerts',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'uvalib-alerts',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
