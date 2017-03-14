@@ -3,7 +3,9 @@
   "description": "University of Virginia Library Alert dialog",
   "main": "uvalib-alerts.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0"
+    "polymer": "Polymer/polymer#^1.8.1",
+    "uvalib-elements": "uvalib-components/uvalib-elements#master",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

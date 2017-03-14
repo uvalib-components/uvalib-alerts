@@ -1,10 +1,14 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../uvalib-models/uvalib-model-alerts.html">
+<link rel="import" href="uvalib-alert-dialog.html">
 
 <!--
 `uvalib-alerts`
-University of Virginia Library Alert dialog
+University of Virginia Library Alerts
 
-@demo demo/index.html 
+Magicly alerts users of the various alert types at the Library.
+
+@demo demo/index.html
 -->
 
 <dom-module id="uvalib-alerts">
@@ -14,7 +18,9 @@ University of Virginia Library Alert dialog
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    <uvalib-model-alerts data="{{_alerts}}"></uvalib-model-alerts>
+    <uvalib-alert-dialog id="dialog" title="{{_first.title}}" type="{{_first.type}}" inner-h-t-m-l="{{_first.body}}"></uvalib-alert-dialog>
+
   </template>
 
   <script>
@@ -23,11 +29,26 @@ University of Virginia Library Alert dialog
       is: 'uvalib-alerts',
 
       properties: {
-        prop1: {
-          type: String,
-          value: 'uvalib-alerts',
+        _alerts: {
+          type: Array,
+          observer: '_newAlert'
+        },
+        _first: {
+          type: Object,
+          computed: '_getFirst(_alerts)'
         },
       },
+
+      _getFirst: function(alerts){
+        return (alerts.length > 0)? alerts[0]: null;
+      },
+
+      _newAlert: function(){
+        if (this._alerts.length > 0) {
+          console.log('new alert');
+          this.$.dialog.open();
+        }
+      }
 
     });
   </script>

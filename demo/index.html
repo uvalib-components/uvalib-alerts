@@ -10,6 +10,10 @@
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../paper-button/paper-button.html">
+
+    <link rel="import" href="../uvalib-alert.html">
+    <link rel="import" href="../uvalib-alert-dialog.html">
     <link rel="import" href="../uvalib-alerts.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
@@ -17,6 +21,16 @@
   </head>
   <body>
     <div class="vertical-section-container centered">
+      <h3>Basic uvalib-alert-dialog demo</h3>
+      <demo-snippet>
+        <template>
+          <uvalib-alert-dialog id="dialog" title="ISL downtime">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis auteirure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </uvalib-alert-dialog>
+          <paper-button raised onclick="dialog.open()">Open Dialog</paper-button>
+        </template>
+      </demo-snippet>
+
       <h3>Basic uvalib-alerts demo</h3>
       <demo-snippet>
         <template>
