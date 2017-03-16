@@ -21,12 +21,27 @@
   </head>
   <body>
     <div class="vertical-section-container">
-      <h3>Basic uvalib-alerts demo</h3>
+
+      <h3>uvalib-alert-dialog demo</h3>
       <demo-snippet>
         <template>
-          <uvalib-alerts></uvalib-alerts>
+          <uvalib-alert-dialog modal id="dialog1"
+            alerts='[{"uuid":"footest","title":"foo","type":"emergency","body":"<p>Hello World</p>","link":"http://google.com"}]'>
+          </uvalib-alert-dialog>
+          <paper-button raised onclick="dialog1.open()">Open Dialog</paper-button>
         </template>
       </demo-snippet>
+
+      <h3>uvalib-alert-dialog demo with multiple alerts</h3>
+      <demo-snippet>
+        <template>
+          <uvalib-alert-dialog modal id="dialog2"
+            alerts='[{"uuid":"foo","title":"foo","type":"emergency","body":"<p>Hello World</p>","link":"http://google.com"},{"uuid":"bar","title":"bar","type":"emergency","body":"<p>Hello UVA</p>","link":"http://google.com"}]'>
+          </uvalib-alert-dialog>
+          <paper-button raised onclick="dialog2.open()">Open Dialog</paper-button>
+        </template>
+      </demo-snippet>
+
     </div>
   </body>
 </html>

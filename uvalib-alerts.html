@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../uvalib-models/uvalib-model-alerts.html">
-<link rel="import" href="uvalib-alert-dialog.html">
+<link rel="import" href="uvalib-alerts-dialog.html">
 
 <!--
 `uvalib-alerts`
@@ -19,7 +19,7 @@ Magicly alerts users of the various alert types at the Library.
       }
     </style>
     <uvalib-model-alerts data="{{_alerts}}"></uvalib-model-alerts>
-    <uvalib-alert-dialog id="dialog" title="{{_first.title}}" type="{{_first.type}}" inner-h-t-m-l="{{_first.body}}"></uvalib-alert-dialog>
+    <uvalib-alerts-dialog id="dialog" alerts="{{_alerts}}"></uvalib-alerts-dialog>
 
   </template>
 
@@ -47,6 +47,9 @@ Magicly alerts users of the various alert types at the Library.
         if (this._alerts.length > 0) {
           console.log('new alert');
           this.$.dialog.open();
+        } else {
+          console.log('bye bye alert')
+          this.$.dialog.close();
         }
       }
 
