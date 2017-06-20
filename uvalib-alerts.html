@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../uvalib-models/uvalib-model-alerts.html">
-<link rel="import" href="uvalib-alerts-dialog.html">
 
 <!--
 `uvalib-alerts`
@@ -16,10 +15,14 @@ Magicly alerts users of the various alert types at the Library.
     <style>
       :host {
         display: block;
+        position: absolute;
+        width: 100%;
+        background-color: blue;
+        height: 100px;
       }
     </style>
     <uvalib-model-alerts data="{{_alerts}}"></uvalib-model-alerts>
-    <uvalib-alerts-dialog id="dialog" alerts="{{_alerts}}"></uvalib-alerts-dialog>
+
 
   </template>
 
@@ -31,7 +34,7 @@ Magicly alerts users of the various alert types at the Library.
       properties: {
         _alerts: {
           type: Array,
-          observer: '_newAlert'
+          observer: '_updateAlerts'
         },
         _first: {
           type: Object,

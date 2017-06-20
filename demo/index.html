@@ -13,8 +13,6 @@
     <link rel="import" href="../../paper-button/paper-button.html">
 
     <link rel="import" href="../uvalib-alerts.html">
-    <link rel="import" href="../uvalib-alerts-dialog.html">
-    <link rel="import" href="../uvalib-alerts.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
@@ -24,7 +22,15 @@
       <h3>Basic uvalib-alerts demo</h3>
       <demo-snippet>
         <template>
-          <uvalib-alerts></uvalib-alerts>
+          <style>
+            #page-container  {
+              position: relative;
+              height: 250px;
+            }
+          </style>
+          <div id="page-container">
+            <uvalib-alerts></uvalib-alerts>
+          </div>
         </template>
       </demo-snippet>
     </div>
