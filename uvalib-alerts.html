@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../uvalib-theme/uvalib-ui-element.html">
 
 <dom-module id="uvalib-alerts">
   <template>
@@ -19,15 +19,18 @@
      * @polymer
      * @demo demo/index.html
      */
-    class UvalibAlerts extends Polymer.Element {
+    class UvalibAlerts extends UvalibUiElement {
       static get is() { return 'uvalib-alerts'; }
       static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'uvalib-alerts'
-          }
-        };
+        return Object.assign(super.properties,{
+        });
+      }
+      //Concat the this elements template with the parents
+      static get template() {
+        var parentTemplate = UvalibUiElement.template.cloneNode(true);
+        var childTemplate = Polymer.DomModule.import('uvalib-alerts', 'template');
+        parentTemplate.content.insertBefore(childTemplate.content,null);
+        return parentTemplate;
       }
     }
 
