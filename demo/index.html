@@ -22,9 +22,15 @@
       <h3>Basic uvalib-alerts demo</h3>
       <demo-snippet>
         <template>
-          <uvalib-alerts></uvalib-alerts>
+          <uvalib-button onclick="seeall()">See All Alerts</uvalib-button>
+          <uvalib-alerts id="alerts"></uvalib-alerts>
         </template>
       </demo-snippet>
+      <script>
+        var seeall = function(){
+          document.querySelector('#alerts').unseeAll();
+        };
+      </script>
     </div>
   </body>
 </html>

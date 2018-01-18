@@ -1,5 +1,10 @@
 <link rel="import" href="../uvalib-theme/uvalib-ui-element.html">
 <link rel="import" href="../uva-helper-libs/polyfills/object.assign.html">
+<link rel="import" href="../uva-models/uva-library-alerts.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import" href="../marked-element/marked-element.html">
+<link rel="import" href="../uvalib-button/uvalib-button.html">
 
 <dom-module id="uvalib-alerts">
   <template>
@@ -7,8 +12,50 @@
       :host {
         display: block;
       }
+      .alert-item {
+        min-height: 41px;
+        background-color: var(--color-primary-orange);
+        border-width: 2px 0 0 0;
+        border-color: var(--color-white);
+        border-style: solid;
+      }
+      .alert-item[hot] {
+        background-color: var(--color-emergency-red);
+      }
+      .alert-head {
+        @apply --layout-horizontal;
+      }
+      .alert-title {
+        @apply --layout-flex;
+      }
+      [slot="markdown-html"] p {
+        margin:0;
+        padding:0;
+      }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <uva-library-alerts id="alertsModel" alerts="{{_alerts}}" seen-count="{{_alertSeenCount}}" seen="{{_alertsSeen}}"></uva-library-alerts>
+    <dom-repeat items="[[_alerts]]" as="alert">
+      <template>
+        <iron-collapse opened$="[[!alert.seen]]">
+          <div class="alert-item" hot$="[[_isHot(alert.severity)]]" uuid="[[alert.uuid]]">
+            <div class="alert-head">
+              <div class="alert-title" on-click="_toggleIt">[[alert.title]]</div>
+              <template is="dom-if" if="[[!_isHot(alert.severity)]]">
+                <uvalib-button on-click="_toggleIt">More</uvalib-button>
+                <uvalib-button on-click="_dismissIt">Dismiss</uvalib-button>
+              </template>
+            </div>
+            <iron-collapse class="body-collapse" opened$="[[_isHot(alert.severity)]]">
+              <div class="alert-body">
+                <marked-element markdown="[[alert.body]]">
+                  <div slot="markdown-html"></div>
+                </marked-element>
+              </div>
+            </iron-collapse>
+          </div>
+        </iron-collapse>
+      </template>
+    </dom-repeat>
   </template>
 
   <script>
@@ -24,6 +71,9 @@
       static get is() { return 'uvalib-alerts'; }
       static get properties() {
         return Object.assign(super.properties,{
+          _alerts: Array,
+          _alertSeenCount: Number,
+          _alertsSeen: Array
         });
       }
       //Concat the this elements template with the parents
@@ -32,6 +82,19 @@
         var childTemplate = Polymer.DomModule.import('uvalib-alerts', 'template');
         parentTemplate.content.insertBefore(childTemplate.content,null);
         return parentTemplate;
+      }
+      _isHot(severity){
+        return (severity==="alert1");
+      }
+      _toggleIt(e){
+        e.currentTarget.parentElement.parentElement.querySelector('.body-collapse').toggle();
+      }
+      _dismissIt(e){
+        var uuid = e.currentTarget.parentElement.parentElement.uuid;
+        this.$.alertsModel.setSeen(uuid);
+      }
+      unseeAll(){
+        this.set('_alertsSeen',[]);
       }
     }
 
