@@ -10,27 +10,19 @@
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../paper-button/paper-button.html">
-
     <link rel="import" href="../uvalib-alerts.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
   </head>
   <body>
-    <div class="vertical-section-container">
+    <div class="vertical-section-container centered">
       <h3>Basic uvalib-alerts demo</h3>
       <demo-snippet>
         <template>
-          <style>
-            #page-container  {
-              position: relative;
-              height: 250px;
-            }
-          </style>
-          <div id="page-container">
-            <uvalib-alerts></uvalib-alerts>
-          </div>
+          <uvalib-alerts></uvalib-alerts>
         </template>
       </demo-snippet>
     </div>
