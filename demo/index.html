@@ -10,6 +10,7 @@
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
     <link rel="import" href="../uvalib-alerts.html">
 
     <custom-style>
@@ -22,8 +23,15 @@
       <h3>Basic uvalib-alerts demo</h3>
       <demo-snippet>
         <template>
-          <uvalib-button onclick="seeall()">See All Alerts</uvalib-button>
-          <uvalib-alerts id="alerts"></uvalib-alerts>
+          <dom-bind id="app">
+            <template>
+              <div>
+                <uvalib-button onclick="seeall()">See All Alerts</uvalib-button>
+                [[_alertSeenCount]]
+              </div>
+              <uvalib-alerts id="alerts" seen-count="{{_alertSeenCount}}"></uvalib-alerts>
+            </template>
+          </demo-bind>
         </template>
       </demo-snippet>
       <script>
