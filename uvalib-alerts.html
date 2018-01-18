@@ -33,7 +33,7 @@
         padding:0;
       }
     </style>
-    <uva-library-alerts id="alertsModel" alerts="{{_alerts}}" seen-count="{{_alertSeenCount}}" seen="{{_alertsSeen}}"></uva-library-alerts>
+    <uva-library-alerts id="alertsModel" alerts="{{_alerts}}" seen-count="{{seenCount}}" seen="{{_alertsSeen}}"></uva-library-alerts>
     <dom-repeat items="[[_alerts]]" as="alert">
       <template>
         <iron-collapse opened$="[[!alert.seen]]">
@@ -72,8 +72,11 @@
       static get properties() {
         return Object.assign(super.properties,{
           _alerts: Array,
-          _alertSeenCount: Number,
-          _alertsSeen: Array
+          _alertsSeen: Array,
+          seenCount: {
+            type: Number,
+            notify: true
+          }
         });
       }
       //Concat the this elements template with the parents
