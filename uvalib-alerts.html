@@ -5,35 +5,14 @@
 <link rel="import" href="../iron-collapse/iron-collapse.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../uvalib-button/uvalib-button.html">
+<link rel="import" href="../uvalib-theme/uvalib-alerts-style.html">
 
 <dom-module id="uvalib-alerts">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-      .alert-item {
-        min-height: 41px;
-        background-color: var(--color-primary-orange);
-        border-width: 2px 0 0 0;
-        border-color: var(--color-white);
-        border-style: solid;
-        color: var(--color-white);
-      }
-      .alert-item[hot] {
-        background-color: var(--color-emergency-red);
-      }
-      .alert-head {
-        @apply --layout-horizontal;
-      }
-      .alert-title {
-        @apply --layout-flex;
-      }
-      [slot="markdown-html"] p {
-        margin:0;
-        padding:0;
-      }
-    </style>
+    <custom-style>
+      <style include="uvalib-theme uvalib-alerts-style"></style>
+    </custom-style>
+
     <uva-library-alerts id="alertsModel" alerts="{{_alerts}}" seen-count="{{seenCount}}" seen="{{_alertsSeen}}"></uva-library-alerts>
     <dom-repeat items="[[_alerts]]" as="alert">
       <template>
