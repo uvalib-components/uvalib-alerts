@@ -19,6 +19,7 @@
       <template>
         <iron-collapse opened$="[[!alert.seen]]" on-opened-changed="_sizeChanged" on-transitioning-changed="_sizeChanged">
           <div class="alert-item" hot$="[[_isHot(alert.severity)]]" uuid="[[alert.uuid]]">
+<div>
             <div class="alert-head">
               <div class="alert-title" on-click="_toggleIt">[[alert.title]]</div>
               <template is="dom-if" if="[[!_isHot(alert.severity)]]">
@@ -33,6 +34,7 @@
                 </marked-element>
               </div>
             </iron-collapse>
+</div>
           </div>
         </iron-collapse>
       </template>
@@ -74,7 +76,7 @@
         e.currentTarget.parentElement.parentElement.querySelector('.body-collapse').toggle();
       }
       _dismissIt(e){
-        var uuid = e.currentTarget.parentElement.parentElement.uuid;
+        var uuid = e.currentTarget.parentElement.parentElement.parentElement.uuid;
         this.$.alertsModel.setSeen(uuid);
       }
       unseeAll(){
