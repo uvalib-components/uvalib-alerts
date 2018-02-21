@@ -18,8 +18,8 @@
     <dom-repeat items="[[_alerts]]" as="alert">
       <template>
         <iron-collapse opened$="[[!alert.seen]]" on-opened-changed="_sizeChanged" on-transitioning-changed="_sizeChanged">
-          <div class="alert-item" hot$="[[_isHot(alert.severity)]]" uuid="[[alert.uuid]]">
-<div>
+          <div class$="alert-item [[alert.severity]]" uuid="[[alert.uuid]]">
+            <div>
             <div class="alert-head">
               <div class="alert-title" on-click="_toggleIt">[[alert.title]]</div>
               <template is="dom-if" if="[[!_isHot(alert.severity)]]">
@@ -34,7 +34,7 @@
                 </marked-element>
               </div>
             </iron-collapse>
-</div>
+            </div>
           </div>
         </iron-collapse>
       </template>
