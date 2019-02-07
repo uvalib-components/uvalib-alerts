@@ -42,6 +42,10 @@
           text-decoration: underline;
           color: var(--color-white);
         }
+        .alert-item.alert2 paper-button:hover {
+          background-color: #C54800;
+          color: var(--uvalib-white);
+        }
         .alert-item.alert3 p a {
           text-decoration: underline;
           color: var(--color-black);
@@ -55,6 +59,25 @@
         }
         .alert-item.alert3 paper-button {
           color: var(--uvalib-black);
+          border-color: var(--color-primary-orange);
+        }
+        .alert-item.alert3 paper-button:hover {
+          background-color: var(--uvalib-secondary-web-orange);
+          color: var(--uvalib-white);
+        }
+        .alert-item.alert1 .alert-head:before, .alert-item.alert2 .alert-head:before {
+          font-family: 'uvalib-custom-icons' !important;
+          speak: none;
+          font-style: normal;
+          font-weight: normal;
+          font-variant: normal;
+          text-transform: none;
+          line-height: 1;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          content: "\f06a";
+          font-size: 2em;
+          padding-right: .25em;
         }
 
         .alert-head {
