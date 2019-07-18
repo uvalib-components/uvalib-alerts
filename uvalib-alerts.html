@@ -142,7 +142,10 @@
       static get is() { return 'uvalib-alerts'; }
       static get properties() {
         return Object.assign(super.properties,{
-          _alerts: Array,
+          _alerts: {
+            type: Array,
+            observer: '_sizeChanged'
+          },
           _alertsSeen: Array,
           seenCount: {
             type: Number,
