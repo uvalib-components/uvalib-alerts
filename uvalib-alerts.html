@@ -106,13 +106,13 @@
       <template>
         <iron-collapse opened$="[[!alert.seen]]" on-opened-changed="_sizeChanged" on-transitioning-changed="_sizeChanged">
           <div class$="alert-item [[alert.severity]]" uuid="[[alert.uuid]]">
-            <div>
-            <div class="alert-head">
+            <div data-title$="[[alert.title]]">
+            <div class="alert-head" >
               <div class="alert-title" on-click="_toggleIt">[[alert.title]]</div>
               <template is="dom-if" if="[[!_isHot(alert.severity)]]">
                 <paper-button class="toggle" on-click="_toggleIt">More</paper-button>
                 <paper-button class="toggle hidden" on-click="_toggleIt">Less</paper-button>
-                <paper-button on-click="_dismissIt">Dismiss</paper-button>
+                <paper-button data-title$="[[alert.title]]" on-click="_dismissIt">Dismiss</paper-button>
               </template>
             </div>
             <iron-collapse class="body-collapse" opened$="[[_isHot(alert.severity)]]" on-opened-changed="_sizeChanged" on-transitioning-changed="_sizeChanged">
@@ -164,6 +164,8 @@
         return (severity==="alert1");
       }
       _toggleIt(e){
+        // alert analytics that we have a request to toggle the alert
+        this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['alert',e.currentTarget.textContent,e.currentTarget.parentElement.parentElement.dataset.title]}}));
         e.currentTarget.parentElement.parentElement.querySelector('.body-collapse').toggle();
         e.currentTarget.parentElement.querySelectorAll('.toggle').forEach(function(el) {
           el.classList.toggle("hidden");
@@ -172,9 +174,13 @@
       }
       _dismissIt(e){
         var uuid = e.currentTarget.parentElement.parentElement.parentElement.uuid;
+        // alert analytics that we have a view dismissed alerts event
+        this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['alert','dismissed',e.currentTarget.dataset.title]}}));
         this.$.alertsModel.setSeen(uuid);
       }
       unseeAll(){
+        // alert analytics that we have a request to unseen all events (show them as not dismissed again)
+        this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['alerts','unseeAll',this.seenCount]}}));
         this.set('_alertsSeen',[]);
       }
       _sizeChanged(){
