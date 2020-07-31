@@ -13,6 +13,7 @@
     <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
     <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../uvalib-alerts.html">
+    <link rel="import" href="../uvalib-alerts-regional.html">
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -33,6 +34,12 @@
               <uvalib-alerts id="alerts" seen-count="{{_alertSeenCount}}"></uvalib-alerts>
             </template>
           </demo-bind>
+        </template>
+      </demo-snippet>
+      <h3>Basic uvalib-alerts-regional demo</h3>
+      <demo-snippet>
+        <template>
+            <uvalib-alerts-regional id="alerts-regional" url="www.library.virginia.edu/services/faculty"></uvalib-alerts-regional>
         </template>
       </demo-snippet>
       <script>

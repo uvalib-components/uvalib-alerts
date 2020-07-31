@@ -1,0 +1,75 @@
+<link rel="import" href="../uvalib-theme/uvalib-ui-element.html">
+<link rel="import" href="../uva-helper-libs/polyfills/object.assign.html">
+<link rel="import" href="../uva-models/uva-library-alerts.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+
+<dom-module id="uvalib-alerts-regional">
+  <template>
+    <custom-style>
+      <style include="uvalib-theme">
+        :host {
+          display: block;
+        }
+      </style>
+    </custom-style>
+
+    <uva-library-alerts firebase path="regionalalerts" id="alertsModel" alerts="{{_alerts}}"></uva-library-alerts>
+    <dom-repeat items="[[alerts]]" as="alert">
+      <template>
+        <div class="alertbox alertbox-primary" inner-h-t-m-l="[[alert.body]]">
+        </div>
+      </template>
+    </dom-repeat>
+  </template>
+
+  <script>
+    /**
+     * `uvalib-alerts-regional`
+     * Manages the UX for Library Web Regional Alerts
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class UvalibAlertsRegional extends UvalibUiElement {
+      static get is() { return 'uvalib-alerts-regional'; }
+      static get properties() {
+        return Object.assign(super.properties,{
+          _alerts: {
+            type: Array,
+            observer: '_alertsChanged'
+          },
+          alerts: {
+            type: Array,
+            value: ()=>{return [];}
+          },
+          /* used for testing url matching, this normally happens automatically */
+          url: String
+        });
+      }
+      //Concat the this elements template with the parents
+      static get template() {
+        var parentTemplate = UvalibUiElement.template.cloneNode(true);
+        var childTemplate = Polymer.DomModule.import('uvalib-alerts-regional', 'template');
+        parentTemplate.content.insertBefore(childTemplate.content,null);
+        return parentTemplate;
+      }
+      _alertsChanged(){
+        this.alerts = this._alerts.filter((alert)=>{
+          // only show alerts that have a url pattern
+          if (alert.url) {
+            // if url pattern matches window.location.href (or this.url for testing)
+            return this._matchesURL(alert.url);
+          }
+        });
+      }
+      _matchesURL(pattern){
+        const re = new RegExp(pattern);
+        const url = (this.url)? this.url:window.location.href;
+        return url.match(re);
+      }
+    }
+
+    window.customElements.define(UvalibAlertsRegional.is, UvalibAlertsRegional);
+  </script>
+</dom-module>
