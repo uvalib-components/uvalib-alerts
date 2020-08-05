@@ -59,14 +59,21 @@
           // only show alerts that have a url pattern
           if (alert.url) {
             // if url pattern matches window.location.href (or this.url for testing)
-            return this._matchesURL(alert.url);
+            if (Array.isArray(alert.url)) {
+              console.log("is array");
+              for (var i=0; i<alert.url.length; i++){
+                if (this._matchesURL(alert.url[i].value)) return true;
+              }
+            }
+            else return this._matchesURL(alert.url);
           }
+          return false;
         });
       }
       _matchesURL(pattern){
         const re = new RegExp(pattern);
         const url = (this.url)? this.url:window.location.href;
-        return url.match(re);
+        return re.test(url.replace(/\/$/,''));
       }
     }
 
