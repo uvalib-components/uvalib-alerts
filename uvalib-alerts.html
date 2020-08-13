@@ -102,7 +102,7 @@
     </custom-style>
 
     <uva-library-alerts id="alertsModel" alerts="{{_alerts}}" seen-count="{{seenCount}}" seen="{{_alertsSeen}}"></uva-library-alerts>
-    <dom-repeat items="[[_alerts]]" as="alert">
+    <dom-repeat items="[[_getAlerts(_alerts,override)]]" as="alert">
       <template>
         <iron-collapse opened$="[[!alert.seen]]" on-opened-changed="_sizeChanged" on-transitioning-changed="_sizeChanged">
           <div class$="alert-item [[alert.severity]]" uuid="[[alert.uuid]]">
@@ -142,9 +142,13 @@
       static get is() { return 'uvalib-alerts'; }
       static get properties() {
         return Object.assign(super.properties,{
+
           _alerts: {
             type: Array,
             observer: '_sizeChanged'
+          },
+          override: {
+            type: Array
           },
           _alertsSeen: Array,
           seenCount: {
@@ -185,6 +189,9 @@
       }
       _sizeChanged(){
         this.dispatchEvent(new CustomEvent('size-changed', {detail: {height: this.clientHeight}}));
+      }
+      _getAlerts(_alerts,override){
+        return override? override: _alerts;
       }
     }
 
