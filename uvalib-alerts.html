@@ -111,13 +111,13 @@
             <div class="alert-head" >
               <div class="alert-title" on-click="_toggleIt">[[alert.title]]</div>
               <template is="dom-if" if="[[!_isHot(alert.severity)]]">
-                <paper-button class="toggle" on-click="_toggleIt">More</paper-button>
-                <paper-button class="toggle hidden" on-click="_toggleIt">Less</paper-button>
+                <paper-button class="toggle" on-click="_toggleIt" aria-expanded="false" aria-controls$="body-[[alert.uuid]]">More</paper-button>
+                <paper-button class="toggle hidden" on-click="_toggleIt" aria-expanded="true" aria-controls$="body-[[alert.uuid]]">Less</paper-button>
                 <paper-button data-title$="[[alert.title]]" on-click="_dismissIt">Dismiss</paper-button>
               </template>
             </div>
             <iron-collapse class="body-collapse" opened$="[[_isHot(alert.severity)]]" on-opened-changed="_sizeChanged" on-transitioning-changed="_sizeChanged">
-              <div class="alert-body">
+              <div class="alert-body" id="body-[[alert.uuid]]">
                 <marked-element markdown="[[alert.body]]">
                   <div slot="markdown-html"></div>
                 </marked-element>
